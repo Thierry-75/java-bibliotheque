@@ -27,6 +27,8 @@ public class Livre extends Bibliotheque {
 	public static void hireBook() {
 		System.out.println("Indiquez votre prénom :");
 		emprunteur = scan.nextLine();
+		if(!emprunteur.isEmpty()) {
+			try {
 		showBooks(liste);
 		ArrayList<String>list = new ArrayList<String>();
 		for(int i = 0; i < liste.size();i++) {
@@ -34,13 +36,21 @@ public class Livre extends Bibliotheque {
 		}
 		System.out.println(emprunteur +" Indiquez le nom du livre à emprunter : "+list);
 		String subject = scan.nextLine();
+		if(!subject.isEmpty()) {
 		for(int j = 0; j < liste.size(); j++) {
 			if(liste.get(j).contains(subject) ) {
 				String hireBook=liste.get(j)+star+emprunteur+"]";
 				liste.remove(j);
 				liste.add(hireBook);
 				showBooks(liste);
+				break;
+					}
+				}
 			}
+		}
+		catch(Exception e) {
+			System.out.println("Ce titre de livre n'existe pas !");
+		}
 		}
 	}
 	
@@ -48,14 +58,21 @@ public class Livre extends Bibliotheque {
 		showBooks(liste);
 		System.out.println("Indiquez le titre du livre à  rendre :");
 		String title = scan.nextLine();
+		if(!title.isEmpty()) {
+			try {
 		for(int k = 0; k < liste.size(); k++) {
 			if(liste.get(k).contains(title)) {
 				liste.remove(k);
 				liste.add(title);
 				showBooks(liste);
+				}
+			}
+			}catch(Exception e){
+				System.out.println("Ce titre de livre n'existe pas");
 			}
 		}
 	}
+	
 
 	public String getTitre() {
 		return titre;

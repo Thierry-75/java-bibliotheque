@@ -13,17 +13,17 @@ public class Bibliotheque {
 
 	public static void showBooks(ArrayList<String> liste) {
 		System.out.println("Liste des livres: "+liste);
-		
-		System.out.println("---------------------------------------");
-		
 	}
 	public static void addBook() {
 		System.out.println("Indiquez le livre à ajouter :");
 		livre = scan.nextLine();
+		if(!livre.isEmpty()) {
 		liste.add(livre);
 		System.out.println("Vous avez ajouté le titre : "+ livre);
 		System.out.println(liste);
 		System.out.println("---------------------------------------");
+		}else
+			addBook();
 	}
 	public static void delBook() {
 		ArrayList<String>list = new ArrayList<String>();
@@ -32,9 +32,18 @@ public class Bibliotheque {
 		}
 		System.out.println("Indiquez le numéro du livre a supprimer : "+list);
 		int numero = scan.nextInt();
+		try {
 		liste.remove(numero);
-		System.out.println("Nouvelle liste des livres : "+liste);
+		for(int i = 0; i < liste.size();i++) {
+			list.add(liste.get(i) + ":" + i);
+		}
+	//	showBooks(list);
 		System.out.println("---------------------------------------");
+		}
+		catch(Exception e) {
+			System.out.println("Ce numéro de livre n'existe pas ");
+		}
+		
 	}
 	public static String getLivre() {
 		return livre;
